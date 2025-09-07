@@ -8,8 +8,8 @@
 </head>
 <body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white h-screen flex items-center justify-center">
 
-  <div class="bg-gray-800 p-6 sm:p-10 rounded-2xl shadow-xl w-full max-w-sm">
-    <h2 class="text-xl sm:text-2xl font-bold text-center mb-6 text-yellow-400">Admin Login</h2>
+  <div class="bg-gray-800 p-10 rounded-2xl shadow-xl w-full max-w-sm">
+    <h2 class="text-2xl font-bold text-center mb-6 text-yellow-400">Admin Login</h2>
     
     <form id="adminLoginForm" class="space-y-5">
       <div>
@@ -31,32 +31,45 @@
     <p id="loginMessage" class="mt-4 text-center text-sm"></p>
   </div>
 
-  <script>
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+    // Firebase Config (replace with your own)
+    const firebaseConfig = {
+      apiKey: "AIzaSyAxQ5C1vvCdoiYp0zv0WKafKBKOxaHUT-0",
+      authDomain: "trading-world-e854e.firebaseapp.com",
+      projectId: "trading-world-e854e",
+      storageBucket: "trading-world-e854e.firebasestorage.app",
+      messagingSenderId: "177258946944",
+      appId: "1:177258946944:web:568cc7c08869ea4611a165"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
     const form = document.getElementById('adminLoginForm');
     const message = document.getElementById('loginMessage');
 
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
       const email = document.getElementById('adminEmail').value;
       const password = document.getElementById('adminPassword').value;
 
-      // Reset classes each time before applying new status
-      message.className = "mt-4 text-center text-sm";
-
-      // Check credentials
-      if (email === "vishupatil@gmail.com" && password === "Welcome@123") {
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
         message.textContent = "✅ Login Successful! Redirecting...";
-        message.classList.add("text-green-400");
+        message.className = "mt-4 text-center text-green-400 font-semibold";
 
-        // Redirect to admin dashboard (to be created later)
         setTimeout(() => {
           window.location.href = "admin-dashboard.html";
         }, 1500);
-
-      } else {
-        message.textContent = "❌ Invalid email or password";
-        message.classList.add("text-red-400");
+      } catch (error) {
+        message.textContent = "❌ " + error.message;
+        message.className = "mt-4 text-center text-red-400 font-semibold";
       }
     });
   </script>
