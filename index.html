@@ -5,66 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trading World</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
 </head>
 <body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white h-screen flex items-center justify-center">
-
-  <div class="text-center">
+	
+  <div class="text-center px-4">
     <!-- Welcome Message -->
-    <h1 class="text-4xl md:text-5xl font-bold mb-6">
+    <h1 class="text-3xl md:text-5xl font-bold mb-6">
       Welcome to <span class="text-yellow-400">Trading World</span>
     </h1>
-    <p class="text-gray-300 mb-10 text-lg">Step into the future of financial freedom 🚀</p>
+    <p class="text-gray-300 mb-10 text-base md:text-lg">Step into the future of financial freedom 🚀</p>
 
-<!-- Login Button with Full-width Hover Banner -->
-<div class="relative inline-block">
-  <button id="loginBtn" 
-    class="px-10 py-4 text-lg font-semibold rounded-2xl 
-           bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 
-           text-black shadow-xl hover:scale-105 transition-transform duration-300">
-    Login
-  </button>
-
-
-
+    <!-- Login Button -->
+    <div class="relative inline-block">
+      <button id="loginBtn" 
+        class="px-6 md:px-10 py-4 text-lg font-semibold rounded-2xl 
+               bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 
+               text-black shadow-xl hover:scale-105 transition-transform duration-300">
+        Login
+      </button>
+    </div>
 
     <!-- Category Login Options -->
-    <!-- Category Login Options -->
-				<div id="loginOptions" class="hidden mt-8 space-x-4 flex flex-wrap justify-center gap-4">
-		  <a href="admin.html" 
-			 class="px-6 py-3 rounded-xl bg-orange-600 hover:bg-orange-500 transition inline-block">
-			 Admin
-		  </a>
-		  <a href="learner.html" 
-			 class="px-6 py-3 rounded-xl bg-white hover:bg-gray-200 text-black transition inline-block">
-			 Learner
-		  </a>
-		  <a href="trader.html" 
-			 class="px-6 py-3 rounded-xl bg-green-600 hover:bg-green-500 transition inline-block">
-			 Trader
-		  </a>
-		  <a href="pro-analyst.html" 
-			 class="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 transition inline-block">
-			 Pro-Analyst
-		  </a>
-		</div>
-
-
+    <div id="loginOptions" class="hidden mt-8 flex flex-wrap justify-center gap-4">
+      <a href="admin.html" 
+        class="px-6 py-3 rounded-xl bg-orange-600 hover:bg-orange-500 transition inline-block">
+        Admin
+      </a>
+      <a href="learner.html" 
+        class="px-6 py-3 rounded-xl bg-white hover:bg-gray-200 text-black transition inline-block">
+        Learner
+      </a>
+      <a href="trader.html" 
+        class="px-6 py-3 rounded-xl bg-green-600 hover:bg-green-500 transition inline-block">
+        Trader
+      </a>
+      <a href="pro-analyst.html" 
+        class="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 transition inline-block">
+        Pro-Analyst
+      </a>
+    </div>
+  </div>
 
   <script>
     const loginBtn = document.getElementById('loginBtn');
     const loginOptions = document.getElementById('loginOptions');
-    const tooltip = document.getElementById('tooltip');
 
-    // Show tooltip on hover
-    loginBtn.addEventListener('mouseenter', () => {
-      tooltip.style.opacity = '1';
-    });
-    loginBtn.addEventListener('mouseleave', () => {
-      tooltip.style.opacity = '0';
-    });
-
-    // Show login options on click
+    // Toggle login options on click
     loginBtn.addEventListener('click', () => {
       loginOptions.classList.toggle('hidden');
     });
