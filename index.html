@@ -3,57 +3,96 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trading World</title>
+  <title>TradeLearner Community</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: radial-gradient(circle at 10% 20%, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1.5s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Secret admin shortcut */
+    #admin-link {
+      display: none;
+    }
+
+    .logo-text {
+      background: linear-gradient(90deg, #3b82f6, #22d3ee, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+  </style>
 </head>
-<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white h-screen flex items-center justify-center">
-	
-  <div class="text-center px-4">
-    <!-- Welcome Message -->
-    <h1 class="text-3xl md:text-5xl font-bold mb-6">
-      Welcome to <span class="text-yellow-400">Trading World</span>
+
+<body class="min-h-screen flex flex-col items-center justify-center text-center px-6">
+
+  <div class="fade-in space-y-10">
+    <!-- Logo Section -->
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold">
+      <span class="logo-text">TradeLearner</span>
+      <span class="text-gray-300 font-light">Community</span>
     </h1>
-    <p class="text-gray-300 mb-10 text-base md:text-lg">Step into the future of financial freedom 🚀</p>
 
-    <!-- Login Button -->
-    <div class="relative inline-block">
-      <button id="loginBtn" 
-        class="px-6 md:px-10 py-4 text-lg font-semibold rounded-2xl 
-               bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 
-               text-black shadow-xl hover:scale-105 transition-transform duration-300">
-        Login
-      </button>
+    <!-- Motivational Quote -->
+    <p class="text-lg sm:text-xl italic text-gray-200 max-w-3xl mx-auto leading-relaxed">
+      “Once you step into the world of trading, you’ll keep learning, evolving, and growing for life.”
+    </p>
+
+    <!-- Description -->
+    <p class="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+      Join a space where traders share real experiences, discuss daily insights, and grow together — one trade at a time.
+    </p>
+
+    <!-- Navigation -->
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="learner.html" class="glass px-8 py-3 rounded-xl text-lg font-semibold hover:bg-blue-600 transition">📘 Learning Hub</a>
+      <a href="community.html" class="glass px-8 py-3 rounded-xl text-lg font-semibold hover:bg-green-600 transition">💬 Community Space</a>
+      <a href="resources.html" class="glass px-8 py-3 rounded-xl text-lg font-semibold hover:bg-purple-600 transition">📊 Market Insights</a>
     </div>
 
-    <!-- Category Login Options -->
-    <div id="loginOptions" class="hidden mt-8 flex flex-wrap justify-center gap-4">
-      <a href="admin.html" 
-        class="px-6 py-3 rounded-xl bg-orange-600 hover:bg-orange-500 transition inline-block">
-        Admin
-      </a>
-      <a href="learner.html" 
-        class="px-6 py-3 rounded-xl bg-white hover:bg-gray-200 text-black transition inline-block">
-        Learner
-      </a>
-      <a href="trader.html" 
-        class="px-6 py-3 rounded-xl bg-green-600 hover:bg-green-500 transition inline-block">
-        Trader
-      </a>
-      <a href="pro-analyst.html" 
-        class="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 transition inline-block">
-        Pro-Analyst
+    <!-- Suggestion Button -->
+    <div>
+      <a href="https://t.me/nileshpatil_5200" target="_blank"
+         class="bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-8 py-3 rounded-lg shadow-lg shadow-yellow-500/30 transition">
+        💡 Share a Suggestion
       </a>
     </div>
+
+    <!-- Hidden Admin Link -->
+    <a href="admin.html" id="admin-link">Admin Page</a>
   </div>
 
   <script>
-    const loginBtn = document.getElementById('loginBtn');
-    const loginOptions = document.getElementById('loginOptions');
-
-    // Toggle login options on click
-    loginBtn.addEventListener('click', () => {
-      loginOptions.classList.toggle('hidden');
+    // Secret shortcut: Ctrl + Shift + A opens admin page
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
+        document.getElementById('admin-link').click();
+      }
     });
   </script>
+
 </body>
 </html>

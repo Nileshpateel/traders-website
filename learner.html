@@ -3,19 +3,100 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Learner Section</title>
+  <title>Learner Section | Trading World</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center h-screen text-white">
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white min-h-screen flex flex-col items-center">
 
-  <div class="text-center space-y-6 px-4">
-    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-400">🚧 Learner Section 🚧</h1>
-    <p class="text-base sm:text-lg text-gray-300">This page is under construction for learners.</p>
-    <a href="index.html" 
-       class="inline-block mt-4 px-5 py-2 sm:px-6 sm:py-3 bg-blue-500 text-black rounded-xl font-bold hover:bg-blue-400 transition">
-      ⬅ Back to Home
-    </a>
-  </div>
+  <!-- Header -->
+  <header class="w-full text-center py-10">
+    <h1 class="text-4xl font-bold text-yellow-400">Learner’s Corner 🧠</h1>
+    <p class="text-gray-300 mt-2 text-lg">We’re all learners here — exploring markets through daily experience.</p>
+  </header>
+
+  <!-- Main Content -->
+  <main class="w-full max-w-6xl px-4 space-y-12">
+
+    <!-- Section 1: Trading Basics -->
+    <section>
+      <h2 class="text-3xl font-semibold text-yellow-400 mb-6 text-center">📘 Trading Basics</h2>
+
+      <div class="grid sm:grid-cols-2 gap-8">
+
+        <!-- Indian Market -->
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-yellow-500/30 transition">
+          <h3 class="text-2xl font-bold text-blue-400 mb-3">Indian Market Basics 🇮🇳</h3>
+          <ul class="list-disc list-inside text-gray-300 space-y-2 text-base">
+            <li>Understanding NSE, BSE, and Nifty indices.</li>
+            <li>How stocks, options, and futures are traded.</li>
+            <li>Trading timings and settlement cycles.</li>
+            <li>How to interpret candlestick patterns.</li>
+            <li>Basics of margin, leverage, and lot size.</li>
+            <li>Common beginner mistakes and how to avoid them.</li>
+          </ul>
+        </div>
+
+        <!-- Forex Market -->
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-blue-500/30 transition">
+          <h3 class="text-2xl font-bold text-green-400 mb-3">Forex Market Basics 🌍</h3>
+          <ul class="list-disc list-inside text-gray-300 space-y-2 text-base">
+            <li>Understanding currency pairs (EUR/USD, GBP/INR, etc.).</li>
+            <li>Major, minor, and exotic pairs.</li>
+            <li>How pips, lots, and leverage work.</li>
+            <li>Market sessions: Asian, London, and New York.</li>
+            <li>How central banks and news affect forex prices.</li>
+            <li>Risk management and stop-loss importance.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 2: Learning Cards -->
+    <section>
+      <h2 class="text-3xl font-semibold text-yellow-400 mb-6 text-center">🧩 Learn Key Concepts</h2>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg hover:scale-105 transition">
+          <h3 class="font-bold text-xl text-yellow-400">Candlestick Basics</h3>
+          <p class="text-gray-400 mt-2">Learn how to read and interpret candles for better entries.</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg hover:scale-105 transition">
+          <h3 class="font-bold text-xl text-yellow-400">Support & Resistance</h3>
+          <p class="text-gray-400 mt-2">Spot key zones where prices react the most.</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg hover:scale-105 transition">
+          <h3 class="font-bold text-xl text-yellow-400">Indicators</h3>
+          <p class="text-gray-400 mt-2">Understand how RSI, MACD, and EMAs guide your decisions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Discussion Area -->
+    <section class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+      <h2 class="text-2xl font-bold text-yellow-400">💬 Today’s Market Discussion</h2>
+      <p class="text-gray-400 mt-2">Share what you learned or noticed in today’s market 👇</p>
+      <textarea class="w-full mt-4 p-3 rounded-lg text-black" rows="3" placeholder="Write your thoughts..."></textarea>
+      <button class="mt-4 px-6 py-2 bg-yellow-500 text-black rounded-xl font-bold hover:bg-yellow-400 transition">Post</button>
+    </section>
+
+    <!-- Section 4: Partner Links -->
+    <section class="text-center">
+      <p class="text-gray-400 text-sm">
+        Start practicing your strategies safely — open a free demo account 
+        <a href="YOUR_PARTNER_LINK_HERE" target="_blank" class="text-yellow-400 hover:underline">here</a>.
+      </p>
+    </section>
+
+    <!-- Back to Home -->
+    <div class="text-center mt-10">
+      <a href="index.html" 
+         class="inline-block px-6 py-3 bg-yellow-500 text-black rounded-xl font-bold hover:bg-yellow-400 transition">
+        ⬅ Back to Home
+      </a>
+    </div>
+
+  </main>
 
 </body>
 </html>
