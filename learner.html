@@ -5,26 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Learner Section | Trading World</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Smooth fade-up animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up {
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out forwards;
+    }
+  </style>
 </head>
+
 <body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white min-h-screen flex flex-col items-center">
 
   <!-- Header -->
-  <header class="w-full text-center py-10">
-    <h1 class="text-4xl font-bold text-yellow-400">Learner’s Corner 🧠</h1>
-    <p class="text-gray-300 mt-2 text-lg">We’re all learners here — exploring markets through daily experience.</p>
+  <header class="w-full text-center py-10 fade-up">
+    <h1 class="text-4xl sm:text-5xl font-bold text-yellow-400 tracking-wide drop-shadow-lg">
+      Learner’s Corner 🧠
+    </h1>
+    <p class="text-gray-300 mt-3 text-lg sm:text-xl">
+      We’re all learners here — exploring markets through experience and shared insights.
+    </p>
   </header>
 
   <!-- Main Content -->
-  <main class="w-full max-w-6xl px-4 space-y-12">
+  <main class="w-full max-w-6xl px-4 space-y-16 fade-up">
 
     <!-- Section 1: Trading Basics -->
     <section>
       <h2 class="text-3xl font-semibold text-yellow-400 mb-6 text-center">📘 Trading Basics</h2>
 
       <div class="grid sm:grid-cols-2 gap-8">
-
         <!-- Indian Market -->
-        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-yellow-500/30 transition">
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-yellow-500/30 hover:-translate-y-2 transition transform">
           <h3 class="text-2xl font-bold text-blue-400 mb-3">Indian Market Basics 🇮🇳</h3>
           <ul class="list-disc list-inside text-gray-300 space-y-2 text-base">
             <li>Understanding NSE, BSE, and Nifty indices.</li>
@@ -37,7 +52,7 @@
         </div>
 
         <!-- Forex Market -->
-        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-blue-500/30 transition">
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-blue-500/30 hover:-translate-y-2 transition transform">
           <h3 class="text-2xl font-bold text-green-400 mb-3">Forex Market Basics 🌍</h3>
           <ul class="list-disc list-inside text-gray-300 space-y-2 text-base">
             <li>Understanding currency pairs (EUR/USD, GBP/INR, etc.).</li>
@@ -48,55 +63,97 @@
             <li>Risk management and stop-loss importance.</li>
           </ul>
         </div>
-
       </div>
     </section>
 
-    <!-- Section 2: Learning Cards -->
+    <!-- Section 2: Learn Key Concepts -->
     <section>
       <h2 class="text-3xl font-semibold text-yellow-400 mb-6 text-center">🧩 Learn Key Concepts</h2>
 
       <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg hover:scale-105 transition">
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg hover:scale-105 hover:shadow-yellow-400/30 transition transform">
           <h3 class="font-bold text-xl text-yellow-400">Candlestick Basics</h3>
           <p class="text-gray-400 mt-2">Learn how to read and interpret candles for better entries.</p>
         </div>
-        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg hover:scale-105 transition">
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg hover:scale-105 hover:shadow-yellow-400/30 transition transform">
           <h3 class="font-bold text-xl text-yellow-400">Support & Resistance</h3>
           <p class="text-gray-400 mt-2">Spot key zones where prices react the most.</p>
         </div>
-        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg hover:scale-105 transition">
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg hover:scale-105 hover:shadow-yellow-400/30 transition transform">
           <h3 class="font-bold text-xl text-yellow-400">Indicators</h3>
           <p class="text-gray-400 mt-2">Understand how RSI, MACD, and EMAs guide your decisions.</p>
         </div>
       </div>
     </section>
 
-    <!-- Section 3: Discussion Area -->
-    <section class="bg-gray-800 p-6 rounded-2xl shadow-lg">
-      <h2 class="text-2xl font-bold text-yellow-400">💬 Today’s Market Discussion</h2>
-      <p class="text-gray-400 mt-2">Share what you learned or noticed in today’s market 👇</p>
-      <textarea class="w-full mt-4 p-3 rounded-lg text-black" rows="3" placeholder="Write your thoughts..."></textarea>
-      <button class="mt-4 px-6 py-2 bg-yellow-500 text-black rounded-xl font-bold hover:bg-yellow-400 transition">Post</button>
+    <!-- Section 3: Platforms I Personally Use -->
+    <section class="text-center space-y-8">
+      <h2 class="text-3xl font-semibold text-yellow-400 mb-4">⚙️ Platforms I Personally Use</h2>
+      <p class="text-gray-300 max-w-2xl mx-auto text-lg">
+        These are the platforms I use in my daily trades.  
+        Explore them to start your own trading journey.
+      </p>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8 px-4">
+
+        <!-- Platform Card Template -->
+        <a href="https://angel-one.onelink.me/Wjgr/drr1kbuf" target="_blank"
+           class="group bg-gradient-to-b from-yellow-500 to-yellow-400 text-black font-bold rounded-2xl p-6 shadow-xl hover:shadow-yellow-400/50 transition transform hover:-translate-y-2 hover:scale-105">
+          <img src="assets/angelone-logo.png" alt="AngelOne Logo" class="h-10 mx-auto mb-4 group-hover:scale-110 transition">
+          <h3 class="text-lg">Trade in Nifty & Sensex</h3>
+          <p class="text-sm text-gray-800 mt-1">(AngelOne)</p>
+        </a>
+
+        <a href="https://one.justmarkets.link/a/fcimc0f1ey" target="_blank"
+           class="group bg-gradient-to-b from-green-500 to-green-400 text-black font-bold rounded-2xl p-6 shadow-xl hover:shadow-green-400/50 transition transform hover:-translate-y-2 hover:scale-105">
+          <img src="assets/jm-logo.png" alt="JustMarkets Logo" class="h-10 mx-auto mb-4 group-hover:scale-110 transition">
+          <h3 class="text-lg">Trade Gold, Silver & Crude</h3>
+          <p class="text-sm text-gray-800 mt-1">(JustMarkets)</p>
+        </a>
+
+        <a href="https://invite.coindcx.com/95071278" target="_blank"
+           class="group bg-gradient-to-b from-purple-500 to-purple-400 text-black font-bold rounded-2xl p-6 shadow-xl hover:shadow-purple-400/50 transition transform hover:-translate-y-2 hover:scale-105">
+          <img src="assets/coindcx-logo.png" alt="CoinDCX Logo" class="h-10 mx-auto mb-4 group-hover:scale-110 transition">
+          <h3 class="text-lg">Trade Meme Coins</h3>
+          <p class="text-sm text-gray-800 mt-1">(CoinDCX)</p>
+        </a>
+      </div>
+
+      <!-- Disabled Platform (Exness) -->
+      <div class="max-w-md mx-auto mt-6 opacity-70 cursor-not-allowed bg-gray-700 p-5 rounded-2xl shadow-inner">
+        <img src="assets/exness-logo.png" alt="Exness Logo" class="h-8 mx-auto mb-2">
+        <p class="text-sm text-gray-300">Exness – Currently not accepting Indian users</p>
+      </div>
     </section>
 
-    <!-- Section 4: Partner Links -->
-    <section class="text-center">
-      <p class="text-gray-400 text-sm">
-        Start practicing your strategies safely — open a free demo account 
-        <a href="YOUR_PARTNER_LINK_HERE" target="_blank" class="text-yellow-400 hover:underline">here</a>.
+    <!-- Section 4: Motivational Quote -->
+    <section class="py-12 text-center">
+      <p class="text-gray-300 italic text-xl max-w-3xl mx-auto leading-relaxed">
+        “Once you step into the world of trading, you embark on a lifelong journey —  
+        where every chart, every candle, and every lesson makes you stronger than yesterday.”
       </p>
     </section>
 
     <!-- Back to Home -->
     <div class="text-center mt-10">
       <a href="index.html" 
-         class="inline-block px-6 py-3 bg-yellow-500 text-black rounded-xl font-bold hover:bg-yellow-400 transition">
+         class="inline-block px-6 py-3 bg-yellow-500 text-black rounded-xl font-bold hover:bg-yellow-400 transition shadow-lg hover:scale-105 transform">
         ⬅ Back to Home
       </a>
     </div>
 
   </main>
+
+  <script>
+    // Fade-up animation trigger
+    const elements = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.style.animationDelay = `${entry.target.dataset.delay || 0}s`, entry.target.classList.add('animate-fadeUp');
+      });
+    }, { threshold: 0.2 });
+    elements.forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
