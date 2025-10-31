@@ -32,7 +32,7 @@
       }
     }
 
-    /* Secret admin shortcut */
+    /* Hide admin link visually */
     #admin-link {
       display: none;
     }
@@ -46,6 +46,9 @@
     }
   </style>
 </head>
+
+<script src="/assets/tracking-snippet.js"></script>
+
 
 <body class="min-h-screen flex flex-col items-center justify-center text-center px-6">
 
@@ -68,9 +71,15 @@
 
     <!-- Navigation -->
     <div class="flex flex-wrap justify-center gap-4">
-      <a href="learner.html" class="glass px-8 py-3 rounded-xl text-lg font-semibold hover:bg-blue-600 transition">📘 Learning Hub</a>
-      <a href="trader.html" class="glass px-8 py-3 rounded-xl text-lg font-semibold hover:bg-green-600 transition">💬 Community Space</a>
-      <a href="pro-analyst.html" class="glass px-8 py-3 rounded-xl text-lg font-semibold hover:bg-purple-600 transition">📊 Market Insights</a>
+      <a href="learner.html" class="glass px-8 py-3 rounded-xl text-lg font-semibold hover:bg-blue-600 transition">
+        📘 Learning Hub
+      </a>
+      <a href="trader.html" class="glass px-8 py-3 rounded-xl text-lg font-semibold hover:bg-green-600 transition">
+        💬 Community Space
+      </a>
+      <a href="marketinsights.html" class="glass px-8 py-3 rounded-xl text-lg font-semibold hover:bg-purple-600 transition">
+        📊 Market Insights
+      </a>
     </div>
 
     <!-- Suggestion Button -->
@@ -85,11 +94,11 @@
     <a href="admin.html" id="admin-link">Admin Page</a>
   </div>
 
+  <!-- Secret Keyboard Shortcut Script -->
   <script>
-    // Secret shortcut: Ctrl + Shift + A opens admin page
     document.addEventListener('keydown', (e) => {
-      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
-        document.getElementById('admin-link').click();
+      if (e.ctrlKey && e.key.toLowerCase() === 'a') {
+        window.location.href = "admin.html";
       }
     });
   </script>

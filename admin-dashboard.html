@@ -1,25 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome Admin</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Dashboard — TradeLearner</title>
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Firebase Compat SDKs (no import/export issues) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+  <style>
+    body { background: linear-gradient(180deg,#071428 0%, #0b1f2b 100%); }
+    .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); }
+    .muted { color: #94a3b8; }
+  </style>
 </head>
-<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center min-h-screen text-white">
+<body class="min-h-screen text-white font-sans">
 
-  <div class="bg-gray-800 shadow-lg rounded-2xl p-8 md:p-12 max-w-lg w-full text-center">
-    <h1 class="text-3xl sm:text-4xl font-bold text-yellow-400 mb-4">Welcome, Admin!</h1>
-    <p class="text-base sm:text-lg text-gray-300 mb-6">🚧 This page is currently under construction.</p>
-    <p class="text-sm sm:text-base text-gray-400 mb-6">If you have any reviews or suggestions, feel free to share them:</p>
+  <div class="max-w-7xl mx-auto p-6">
 
-    <a href="https://t.me/nileshpatil_5200" target="_blank"
-       class="inline-block bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-6 py-3 rounded-lg transition">
-      💬 Leave a Suggestion
-    </a>
+    <!-- Header -->
+    <header class="flex items-center justify-between mb-6">
+      <div>
+        <h1 class="text-2xl font-bold">TradeLearner — Admin Dashboard</h1>
+        <p class="muted">Monitor page views, referral clicks, sessions, and suggestions.</p>
+      </div>
 
-    <p class="mt-8 italic text-gray-400 text-sm sm:text-base">🙏 Thank you for your patience while we build something great!</p>
+      <div class="flex items-center gap-4">
+        <div id="admin-email" class="muted"></div>
+        <button id="signOutBtn" class="bg-yellow-400 text-black px-4 py-2 rounded font-semibold hidden">Sign out</button>
+      </div>
+    </header>
+
+    <!-- Cards -->
+    <section class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div class="card p-4 rounded-lg">
+        <div class="text-sm muted">Page Views (total)</div>
+        <div id="card-pageviews" class="text-2xl font-bold mt-2">—</div>
+      </div>
+      <div class="card p-4 rounded-lg">
+        <div class="text-sm muted">Unique Users</div>
+        <div id="card-unique" class="text-2xl font-bold mt-2">—</div>
+      </div>
+      <div class="card p-4 rounded-lg">
+        <div class="text-sm muted">Avg. Session (sec)</div>
+        <div id="card-avgsession" class="text-2xl font-bold mt-2">—</div>
+      </div>
+      <div class="card p-4 rounded-lg">
+        <div class="text-sm muted">Referral Clicks</div>
+        <div id="card-referrals" class="text-2xl font-bold mt-2">—</div>
+      </div>
+    </section>
+
+    <!-- Recent visits -->
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="card p-4 rounded-lg col-span-1 lg:col-span-2">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="font-semibold">Recent Visits</h2>
+          <button id="refreshVisits" class="text-sm muted hover:text-white">Refresh</button>
+        </div>
+        <div id="visitsList" class="space-y-2 max-h-64 overflow-auto"></div>
+      </div>
+
+      <!-- Referrals -->
+      <div class="card p-4 rounded-lg">
+        <h2 class="font-semibold mb-3">Referral Links</h2>
+        <div id="refList" class="space-y-3"></div>
+      </div>
+    </section>
+
+    <!-- Suggestions -->
+    <section class="card p-4 rounded-lg mt-6">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="font-semibold">Suggestions / Feedback</h2>
+        <div class="muted text-sm">Latest first</div>
+      </div>
+      <div id="suggestions" class="space-y-3 max-h-56 overflow-auto"></div>
+    </section>
+
+    <!-- Control Panel -->
+    <section class="card p-4 rounded-lg mt-6">
+      <h2 class="font-semibold mb-3">Control Panel</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="text-sm muted">Announcement text</label>
+          <input id="announcement" class="w-full mt-1 p-2 rounded bg-transparent border border-gray-700" placeholder="Text shown on Market Insights" />
+        </div>
+
+        <div>
+          <label class="text-sm muted">AngelOne referral</label>
+          <input id="refAngel" class="w-full mt-1 p-2 rounded bg-transparent border border-gray-700" placeholder="https://..." />
+        </div>
+
+        <div>
+          <label class="text-sm muted">JustMarkets referral</label>
+          <input id="refJM" class="w-full mt-1 p-2 rounded bg-transparent border border-gray-700" placeholder="https://..." />
+        </div>
+
+        <div>
+          <label class="text-sm muted">CoinDCX referral</label>
+          <input id="refCD" class="w-full mt-1 p-2 rounded bg-transparent border border-gray-700" placeholder="https://..." />
+        </div>
+      </div>
+
+      <div class="mt-4 flex gap-2">
+        <button id="saveConfig" class="bg-green-500 text-black px-4 py-2 rounded font-semibold">Save</button>
+        <button id="clearData" class="bg-red-600 text-white px-4 py-2 rounded">Clear test data</button>
+      </div>
+      <p class="muted text-xs mt-3">Note: Clearing test data will delete collections named: page_views, referrals, sessions.</p>
+    </section>
   </div>
 
+  <!-- Firebase Logic -->
+  <script>
+    /*************** CONFIG ***************/
+    const firebaseConfig = {
+      apiKey: "AIzaSyAxQ5C1vvCdoiYp0zv0WKafKBKOxaHUT-0",
+      authDomain: "trading-world-e854e.firebaseapp.com",
+      projectId: "trading-world-e854e",
+      storageBucket: "trading-world-e854e.firebasestorage.app",
+      messagingSenderId: "177258946944",
+      appId: "1:177258946944:web:568cc7c08869ea4611a165"
+    };
+
+    const ALLOWED_ADMIN_EMAIL = "nileshpatilsmailbox@gmail.com";
+
+    /*************** INIT ***************/
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    const signOutBtn = document.getElementById('signOutBtn');
+    const adminEmailEl = document.getElementById('admin-email');
+
+    const cardPageviews = document.getElementById('card-pageviews');
+    const cardUnique = document.getElementById('card-unique');
+    const cardAvg = document.getElementById('card-avgsession');
+    const cardRefs = document.getElementById('card-referrals');
+    const visitsList = document.getElementById('visitsList');
+    const refList = document.getElementById('refList');
+    const suggestionsEl = document.getElementById('suggestions');
+
+    const announcementInput = document.getElementById('announcement');
+    const refAngelInput = document.getElementById('refAngel');
+    const refJMInput = document.getElementById('refJM');
+    const refCDInput = document.getElementById('refCD');
+    const saveConfigBtn = document.getElementById('saveConfig');
+    const clearDataBtn = document.getElementById('clearData');
+    const refreshVisitsBtn = document.getElementById('refreshVisits');
+
+    /*************** AUTH ***************/
+    auth.onAuthStateChanged(async user => {
+      if (!user) {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        try {
+          await auth.signInWithPopup(provider);
+        } catch (err) {
+          console.error("Sign-in cancelled:", err);
+        }
+        return;
+      }
+
+      if (user.email !== ALLOWED_ADMIN_EMAIL) {
+        alert("Access denied: not an admin account.");
+        await auth.signOut();
+        return;
+      }
+
+      adminEmailEl.textContent = user.email;
+      signOutBtn.classList.remove('hidden');
+
+      loadOverview();
+      loadRecentVisits();
+      loadReferrals();
+      loadSuggestions();
+      loadConfig();
+    });
+
+    signOutBtn.addEventListener('click', () => auth.signOut());
+
+    /*************** LOAD FUNCTIONS ***************/
+    async function loadOverview() {
+      const pvSnap = await db.collection("page_views").get();
+      cardPageviews.textContent = pvSnap.size;
+
+      const users = new Set();
+      pvSnap.forEach(d => { if (d.data().uid) users.add(d.data().uid); });
+      cardUnique.textContent = users.size;
+
+      const sSnap = await db.collection("sessions").get();
+      let total = 0, count = 0;
+      sSnap.forEach(d => { if (d.data().durationSec) { total += d.data().durationSec; count++; } });
+      cardAvg.textContent = count ? Math.round(total / count) : "—";
+
+      const refSnap = await db.collection("referrals").get();
+      cardRefs.textContent = refSnap.size;
+    }
+
+    async function loadRecentVisits(limit = 50) {
+      visitsList.innerHTML = "Loading...";
+      const snap = await db.collection("page_views").orderBy("timestamp", "desc").limit(limit).get();
+      visitsList.innerHTML = "";
+      snap.forEach(doc => {
+        const d = doc.data();
+        const el = document.createElement('div');
+        el.className = "p-3 rounded border border-gray-700";
+        el.innerHTML = `<div class="text-xs muted">${new Date(d.timestamp?.toDate?.() || d.timestamp).toLocaleString()}</div>
+                        <div class="text-sm">Page: <strong>${d.page || '—'}</strong> — User: <span class="muted">${d.uid || 'guest'}</span></div>
+                        <div class="text-xs muted">Referrer: ${d.referrer || 'direct'}</div>`;
+        visitsList.appendChild(el);
+      });
+    }
+
+    refreshVisitsBtn.addEventListener('click', loadRecentVisits);
+
+    async function loadReferrals() {
+      refList.innerHTML = "Loading...";
+      const snap = await db.collection("referrals").orderBy("timestamp", "desc").limit(100).get();
+      refList.innerHTML = "";
+      const counts = {};
+      snap.forEach(doc => {
+        const d = doc.data();
+        counts[d.link] = (counts[d.link] || 0) + 1;
+      });
+      Object.entries(counts).forEach(([link, c]) => {
+        const el = document.createElement('div');
+        el.className = "flex items-center justify-between";
+        el.innerHTML = `<div class="text-sm break-all">${link}</div><div class="font-bold">${c}</div>`;
+        refList.appendChild(el);
+      });
+    }
+
+    async function loadSuggestions() {
+      suggestionsEl.innerHTML = "Loading...";
+      const snap = await db.collection("suggestions").orderBy("timestamp", "desc").limit(50).get();
+      suggestionsEl.innerHTML = "";
+      snap.forEach(doc => {
+        const d = doc.data();
+        const el = document.createElement('div');
+        el.className = "p-3 rounded border border-gray-700";
+        el.innerHTML = `<div class="text-sm muted">${new Date(d.timestamp?.toDate?.() || d.timestamp).toLocaleString()}</div>
+                        <div class="mt-1">${d.text}</div>
+                        <div class="text-xs muted mt-2">From: ${d.uid || 'unknown'}</div>`;
+        suggestionsEl.appendChild(el);
+      });
+    }
+
+    async function loadConfig() {
+      const docRef = db.collection("config").doc("site");
+      const snap = await docRef.get();
+      if (snap.exists) {
+        const d = snap.data();
+        announcementInput.value = d.announcement || "";
+        refAngelInput.value = d.refAngel || "";
+        refJMInput.value = d.refJM || "";
+        refCDInput.value = d.refCD || "";
+      }
+    }
+
+    saveConfigBtn.addEventListener('click', async () => {
+      await db.collection("config").doc("site").set({
+        announcement: announcementInput.value,
+        refAngel: refAngelInput.value,
+        refJM: refJMInput.value,
+        refCD: refCDInput.value
+      }, { merge: true });
+      alert("Saved");
+    });
+
+    clearDataBtn.addEventListener('click', async () => {
+      if (!confirm("Delete collections (page_views, referrals, sessions, suggestions)?")) return;
+      const names = ["page_views", "referrals", "sessions", "suggestions"];
+      for (const name of names) {
+        const snap = await db.collection(name).limit(200).get();
+        const batch = db.batch();
+        snap.forEach(doc => batch.delete(doc.ref));
+        await batch.commit();
+      }
+      alert("Cleared test data.");
+      loadOverview(); loadRecentVisits(); loadReferrals(); loadSuggestions();
+    });
+  </script>
 </body>
 </html>
